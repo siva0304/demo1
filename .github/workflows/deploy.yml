@@ -1,4 +1,4 @@
-name: Deploy Secure Login App
+name: Deploy Serverless App to Vercel
 
 on:
   push:
@@ -10,19 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+    - name: Install Vercel CLI
+      run: npm install -g vercel
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Start Server
+    - name: Deploy to Vercel
       env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         SECRET_PW1: ${{ secrets.SECRET_PW1 }}
         SECRET_PW2: ${{ secrets.SECRET_PW2 }}
-      run: npm start
+      run: vercel --prod --token $VERCEL_TOKEN --env SECRET_PW1=$SECRET_PW1 --env SECRET_PW2=$SECRET_PW2
