@@ -1,24 +1,18 @@
-name: Deploy Serverless App to Vercel
+name: Deploy
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Install Vercel CLI
-      run: npm install -g vercel
-
-    - name: Deploy to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        SECRET_PW1: ${{ secrets.SECRET_PW1 }}
-        SECRET_PW2: ${{ secrets.SECRET_PW2 }}
-      run: vercel --prod --yes --token $VERCEL_TOKEN --env SECRET_PW1=$SECRET_PW1 --env SECRET_PW2=$SECRET_PW2
+      - name: Use secret in script
+        run: echo "My secret is $MY_SECRET"
+        env:
+          # MY_SECRET: ${{ secrets.API_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SECRET_PW1: ${{ secrets.SECRET_PW1 }}
+          SECRET_PW2: ${{ secrets.SECRET_PW2 }}
