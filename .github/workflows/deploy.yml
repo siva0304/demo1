@@ -21,4 +21,4 @@ jobs:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         SECRET_PW1: ${{ secrets.SECRET_PW1 }}
         SECRET_PW2: ${{ secrets.SECRET_PW2 }}
-      run: vercel --prod --token $VERCEL_TOKEN --env SECRET_PW1=$SECRET_PW1 --env SECRET_PW2=$SECRET_PW2
+      run: vercel --prod --yes --token $VERCEL_TOKEN --env SECRET_PW1=$SECRET_PW1 --env SECRET_PW2=$SECRET_PW2
